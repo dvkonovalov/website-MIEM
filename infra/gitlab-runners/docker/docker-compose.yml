@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  shell-runner:
+    restart: always
+    container_name: gitlab-shell-runner
+    image: gitlab/gitlab-runner:latest
+    environment:
+      TZ: Europe/Moscow
+    hostname: runner
+    volumes:
+      - ./shell/config:/etc/gitlab-runner
+      - ./shell/ssh:/home/gitlab-runner/.ssh
+    networks:
+      gitlab-runners-network:
+        ipv4_address: 10.10.10.2
+
+networks:
+  gitlab-runners-network:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.10.10.0/24
+         gateway: 10.10.10.1
