@@ -1,11 +1,3 @@
-data "template_file" "user_ssh_config" {
-  template = file(var.instance_user_template)
-  vars     = {
-    ssh_user = var.ssh_user.user
-    ssh_key  = var.ssh_user.key
-  }
-}
-
 resource "yandex_compute_instance" "jump_host" {
   name = "jump-host"
   platform_id = var.instance_platform_id
@@ -27,6 +19,6 @@ resource "yandex_compute_instance" "jump_host" {
   }
 
   metadata = {
-    user-data = data.template_file.user_ssh_config.rendered
+    user-data = templatefile(var.instance_user_template, { users = var.ssh_users })
   }
 }

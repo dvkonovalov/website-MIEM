@@ -70,7 +70,7 @@ variable "instance_user_template" {
   default     = "../../terraform/templates/ssh-user.tftpl"
 }
 
-variable "ssh_user" {
-  description = "SSH user and public key of user"
-  type        = object({ user=string, key=string })
+variable "ssh_users" {
+  description = "SSH users and public keys of users"
+  type        = list(object({ name=string, key=string }))
 }

@@ -1,9 +1,11 @@
 #cloud-config
 ssh_pwauth: no
 users:
-  - name: ${ssh_user}
+%{ for user in users }
+  - name: ${user.name}
     groups: sudo
     shell: /bin/bash
     sudo: ALL=(ALL) NOPASSWD:ALL
     ssh_authorized_keys:
-      - ${ssh_key}
+      - ${user.key}
+%{ endfor }
