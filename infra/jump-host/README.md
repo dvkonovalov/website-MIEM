@@ -1,7 +1,7 @@
 # Jump-Host
 
 ### Что это?
-Специальная ВМ, которая обладает белым IP для proxy-доступа ко всем машинкам закрытой сети. IP статичный и зафиксированный `158.160.49.46`.
+Специальная ВМ, которая обладает белым IP для proxy-доступа ко всем машинкам закрытой сети. IP статичный и зафиксированный `178.154.201.23`.
 
 ### Как пользоваться?
 
@@ -20,7 +20,7 @@ ssh-add ~/.ssh/vkr
 Host vkr-jump-host
   User aanazaretyan        # User of Jump-Host
 
-  HostName 158.160.49.46   # IP of Jump-Host
+  HostName 178.154.201.23   # IP of Jump-Host
 
   ForwardAgent yes         # (required) Forwarding
                            # agent with Private key
@@ -46,5 +46,5 @@ ssh vkr-target
 
 #### Без конфигурации
 ```shell
-ssh -A -i ~/.ssh/vkr -J aanazaretyan@158.160.49.46 aanazaretyan@target.internal.rane
+ssh -A -i ~/.ssh/vkr -J aanazaretyan@178.154.201.23 aanazaretyan@target.internal.rane
 ```
