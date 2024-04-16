@@ -1,7 +1,12 @@
 # Jump-Host
 
 ### Что это?
-Специальная ВМ, которая обладает белым IP для proxy-доступа ко всем машинкам закрытой сети. IP статичный и зафиксированный `178.154.201.23`.
+Специальная ВМ, которая обладает белым IP для proxy-доступа ко всем машинкам закрытой сети. IP статичный и зафиксированный.
+
+Чтобы получить информацию об IP можно воспользоваться или перейти по [ссылке](https://console.yandex.cloud/folders/b1g6b2aabbvf4f103r9l/vpc/addresses)
+```shell
+yc vpc address get --name jump-host-0-public-ip
+```
 
 ### Как пользоваться?
 
@@ -18,9 +23,9 @@ ssh-add ~/.ssh/vkr
 1. Добавить в ~/.ssh/config следующие строки:
 ```py
 Host vkr-jump-host
-  User aanazaretyan        # User of Jump-Host
+  User jump-host-user      # User of Jump-Host
 
-  HostName 178.154.201.23   # IP of Jump-Host
+  HostName <Public IP>     # IP of Jump-Host
 
   ForwardAgent yes         # (required) Forwarding
                            # agent with Private key
@@ -31,7 +36,7 @@ Host vkr-jump-host
                            # connecting to Host-Jump
 
 Host vkr-target
-  User aanazaretyan              # User of target machine
+  User target-user               # User of target machine
 
   HostName target.internal.rane  # FQDN of target machine
 
@@ -46,5 +51,5 @@ ssh vkr-target
 
 #### Без конфигурации
 ```shell
-ssh -A -i ~/.ssh/vkr -J aanazaretyan@178.154.201.23 aanazaretyan@target.internal.rane
+ssh -A -i ~/.ssh/vkr -J jump-host-user@<Public IP> target-user@target.internal.rane
 ```

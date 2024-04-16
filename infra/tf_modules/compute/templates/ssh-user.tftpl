@@ -7,5 +7,5 @@ users:
     shell: /bin/bash
     sudo: ALL=(ALL) NOPASSWD:ALL
     ssh_authorized_keys:
-      - ${user.key}
+      - ${user.public_key}
 %{ endfor }
