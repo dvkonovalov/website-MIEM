@@ -73,6 +73,6 @@ variable "ssh_users" {
   type        = list(object(
     {
       name=string
-      public_key=string 
+      public_key=string
     }))
 }
