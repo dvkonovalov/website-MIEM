@@ -3,6 +3,11 @@ variable "yandex_zone" {
   type        = string
 }
 
+variable "folder_id" {
+  description = "Yandex folder id"
+  type        = string
+}
+
 variable "subnet_name" {
   description = "Name of subnet. Use as names and prefixes"
   type = string

@@ -53,6 +53,8 @@ module "network" {
   source = "./tf_modules/network"
 
   yandex_zone = var.yandex_zone
+  folder_id = var.yandex_folder_id
+
   dns_zone = "internal.rane."
   subnet_name = "vkr"
 }
