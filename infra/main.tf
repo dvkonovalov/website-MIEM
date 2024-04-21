@@ -70,6 +70,8 @@ module "gitlab-runners" {
   dns = module.network.dns
 
   ssh_users = var.ssh_users
+
+  instance_core_fraction = 50
 }
 
 module "jump-hosts" {
