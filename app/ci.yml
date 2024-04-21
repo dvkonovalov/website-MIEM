@@ -2,9 +2,9 @@ app-flake8:
   stage: test
   image: python:3
   before_script:
-    - pip install flake8
+    - pip install flake8 flake8-docstrings
   script:
-    - flake8 --config app/.flake8 app/
+    - flake8 --config app/.flake8 --docstring-convention google app/
   tags:
     - vkr-runner
   rules:

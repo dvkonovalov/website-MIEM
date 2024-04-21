@@ -1,5 +1,4 @@
-"""
-WSGI config for remote_lab project.
+"""WSGI config for remote_lab project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

@@ -1,5 +1,4 @@
-"""
-ASGI config for remote_lab project.
+"""ASGI config for remote_lab project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
