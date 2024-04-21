@@ -1,0 +1,11 @@
+app-flake8:
+  stage: test
+  image: python:3
+  before_script:
+    - pip install flake8
+  script:
+    - flake8 --config app/.flake8 app/
+  tags:
+    - vkr-runner
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
