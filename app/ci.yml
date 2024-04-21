@@ -11,3 +11,4 @@ app-flake8:
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event' && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'main'
       changes:
         - app/**/*
+    - if: $CI_COMMIT_BRANCH == 'main'
