@@ -1,6 +1,0 @@
-[flake8]
-max-line-length = 119
-
-per-file-ignores =
-    # Allow use "Name" key in dict remote_lab.settings.py.AUTH_PASSWORD_VALIDATORS
-    remote_lab/settings.py:WPS226
