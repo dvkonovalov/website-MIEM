@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  app:
+    build: ./app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+      - /app/frontend/node_modules
+
+  wetty:
+    build: ./wetty
+    restart: unless-stopped
+    ports:
+      - "4001:4001"
+    environment:
+      - TERM=xterm-256color
+
+
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "7000:7000"
+    depends_on:
+      - app
+      - wetty
+    restart: always
