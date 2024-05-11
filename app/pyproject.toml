@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "rane"
+version = "1.0.0"
+description = "Django + React web-application for Remote Access to Network Equipment (RANE)"
+authors = ["MIEM 1300 <https://cabinet.miem.hse.ru/#/project/1300>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^5.0.6"
+django-cors-headers = "^4.3.1"
+djangorestframework = "^3.15.1"
+requests = "^2.31.0"
+pillow = "^10.3.0"
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.0.0"
+flake8-pyproject = "^1.2.3"
+mypy = "^1.9.0"
+django-stubs = "^5.0.0"
+djangorestframework-stubs = "^3.15.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.flake8]
+ignore = ['WPS305', 'WPS237']
+max-line-length = 120

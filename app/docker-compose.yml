@@ -1,0 +1,20 @@
+services:
+  app:
+    build: .
+
+  wetty:
+    image: wettyoss/wetty
+    restart: unless-stopped
+    environment:
+      - TERM=xterm-256color
+
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 7000:7000
+    depends_on:
+      - app
+      - wetty
+    restart: always
