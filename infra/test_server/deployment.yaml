@@ -1,0 +1,50 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: test-server
+  namespace: test-server
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: test-server
+  template:
+    metadata:
+      labels:
+        app: test-server
+    spec:
+      imagePullSecrets:
+        - name: gitlab-registry
+      containers:
+      - name: backend
+        image: __IMAGE__
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: 128Mi
+            cpu: 250m
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: 8080
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 1
+          failureThreshold: 1
+          successThreshold: 2
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: test-server
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 178.154.202.134
+  ports:
+  - port: 80
+    name: plaintext
+    targetPort: 8080
+  selector:
+    app: test-server

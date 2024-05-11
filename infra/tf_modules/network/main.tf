@@ -38,7 +38,7 @@ resource "yandex_vpc_route_table" "rt" {
 }
 
 resource "yandex_dns_zone" "dns" {
-  zone             = "internal.rane."
+  zone             = var.dns_zone
   name             = "${var.subnet_name}-dns"
   public           = false
   private_networks = [ yandex_vpc_network.vpc_net.id ]

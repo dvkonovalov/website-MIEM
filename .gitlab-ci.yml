@@ -1,5 +1,8 @@
 stages:
   - test
+  - build
+  - security
+  - deploy
 
 include:
-  - local: 'app/ci.yml'
+  - local: 'infra/test_server/ci.yml'

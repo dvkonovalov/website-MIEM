@@ -49,41 +49,24 @@ module "service_accounts" {
   ]
 }
 
-module "network" {
+module "k8s-network" {
   source = "./tf_modules/network"
 
   yandex_zone = var.yandex_zone
   folder_id = var.yandex_folder_id
 
-  dns_zone = "internal.rane."
-  subnet_name = "vkr"
+  dns_zone = "k8s.rane."
+  subnet_name = "k8s"
+
+  vpc_v4_networks = [ "10.10.1.0/24" ]
 }
 
-module "gitlab-runners" {
-  source = "./tf_modules/compute"
+module "k8s" {
+  source = "./tf_modules/managed-k8s"
 
-  yandex_zone = var.yandex_zone
-  instance_name = "gitlab-runner-${count.index}"
-  count = 1
+  folder_id = var.yandex_folder_id
 
-  subnet = module.network.subnet
-  dns = module.network.dns
-
-  ssh_users = var.ssh_users
-
-  instance_core_fraction = 50
-}
-
-module "jump-hosts" {
-  source = "./tf_modules/compute"
-
-  yandex_zone = var.yandex_zone
-  instance_name = "jump-host-${count.index}"
-  count = 1
-
-  subnet = module.network.subnet
-  dns = module.network.dns
-  use_external_ip = true
-
-  ssh_users = var.ssh_users
+  cluster_name = "rane-k8s"
+  subnet = module.k8s-network.subnet
+  network = module.k8s-network.network
 }

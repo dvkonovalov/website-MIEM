@@ -1,0 +1,87 @@
+include:
+  - project: 'aanazaretyan-vkr/devops/gitlab-ci-extends/python-flake'
+    ref: v1.0.0
+    file: python-flake.yaml
+  - project: 'aanazaretyan-vkr/devops/gitlab-ci-extends/python-mypy'
+    ref: v1.0.0
+    file: python-mypy.yaml
+  - project: 'aanazaretyan-vkr/devops/gitlab-ci-extends/kaniko-build'
+    ref: v1.0.0
+    file: kaniko-build.yaml
+  - project: 'aanazaretyan-vkr/devops/gitlab-ci-extends/k8s-deploy'
+    ref: v1.0.0
+    file: k8s-deploy.yaml
+  - project: 'aanazaretyan-vkr/devops/gitlab-ci-extends/trivy-scan-image'
+    ref: v1.0.0
+    file: trivy-scan-image.yaml
+
+test-server-flake8:
+  extends: .python-flake
+  variables:
+    POETRY_DIR: infra/test_server
+  tags:
+    - runner
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event' && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'main'
+      changes:
+        - infra/test_server/**/*
+    - if: $CI_COMMIT_BRANCH == 'main'
+
+test-server-mypy:
+  extends: .python-mypy
+  variables:
+    POETRY_DIR: infra/test_server
+  tags:
+    - runner
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event' && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'main'
+      changes:
+        - infra/test_server/**/*
+    - if: $CI_COMMIT_BRANCH == 'main'
+
+test-server-build:
+  extends: .kaniko-build
+  variables:
+    IMAGE_NAME: ${CI_REGISTRY_IMAGE}/test-server:${CI_COMMIT_REF_NAME}
+    BUILD_DOCKERFILE_PATH: infra/test_server/Dockerfile
+    BUILD_CONTEXT: infra/test_server
+    BUILD_ARGS: "SERVER_VERSION=${CI_COMMIT_REF_NAME}"
+  tags:
+    - runner
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event' && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'main'
+      changes:
+        - infra/test_server/**/*
+    - if: $CI_COMMIT_BRANCH == 'main'
+    - if: $CI_COMMIT_TAG
+
+trivy-scan-image:
+  extends: .trivy-scan-image
+  variables:
+    IMAGE_NAME: ${CI_REGISTRY_IMAGE}/test-server:${CI_COMMIT_REF_NAME}
+    REPORT_FILE_NAME: image-scanning-report.json
+    CACHE_DIR: .trivycache
+  cache:
+    paths:
+      - ${CACHE_DIR}
+  artifacts:
+    when: always
+    reports:
+      container_scanning: ${REPORT_FILE_NAME}
+  tags:
+    - docker-runner
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event' && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'main'
+      changes:
+        - infra/test_server/**/*
+    - if: $CI_COMMIT_BRANCH == 'main'
+
+deploy:
+  extends: .k8s-deploy
+  tags:
+    - runner
+  variables:
+    IMAGE_NAME: ${CI_REGISTRY_IMAGE}/test-server:${CI_COMMIT_REF_NAME}
+    K8S_SPEC_PATH: infra/test_server/deployment.yaml
+  rules:
+    - if: $CI_COMMIT_TAG
