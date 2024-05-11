@@ -106,8 +106,17 @@ resource "yandex_kubernetes_node_group" "rane_cluster_node_group" {
   }
 }
 
-resource "yandex_vpc_address" "public_ip" {
-  name                = "k8s-balancer-public-ip"
+resource "yandex_vpc_address" "public_ip_1" {
+  name                = "k8s-balancer-public-ip-1"
+  deletion_protection = true
+
+  external_ipv4_address {
+    zone_id = var.subnet.zone
+  }
+}
+
+resource "yandex_vpc_address" "public_ip_2" {
+  name                = "k8s-balancer-public-ip-2"
   deletion_protection = true
 
   external_ipv4_address {

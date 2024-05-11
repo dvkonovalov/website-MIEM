@@ -41,7 +41,7 @@ metadata:
   name: test-server
 spec:
   type: LoadBalancer
-  loadBalancerIP: 178.154.202.134
+  loadBalancerIP: 130.193.48.90
   ports:
   - port: 80
     name: plaintext

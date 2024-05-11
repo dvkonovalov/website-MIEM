@@ -30,7 +30,7 @@ def _test_deployment():
         )
         try:
             responce = requests.get(
-                'http://178.154.202.134/version',
+                'http://130.193.48.90/version',
                 timeout=REQUSET_TIMEOUT_SECONDS,
             )
         except requests.ConnectionError:
