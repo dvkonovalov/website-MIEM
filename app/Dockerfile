@@ -24,6 +24,7 @@ COPY --from=poetry-installer /opt/.venv .venv
 RUN rm -rf /app/frontend
 COPY --from=build-frontend /app/frontend/ /app/frontend
 RUN useradd -r user
+RUN chown user /app && chown user db.sqlite3 
 USER user
 EXPOSE 8000
 ENTRYPOINT .venv/bin/python manage.py runserver 0.0.0.0:8000

@@ -14,7 +14,7 @@ const ScheduleFetcher = () => {
   };
 
   const { data: schedules, error } = useSWR(
-    `http://127.0.0.1:8000/api/schedule/?fromdate=${formatDate(toprofessor)}&todate=${formatDate(nextWeek)}`,
+    `http://127.0.0.1:7000/api/schedule/?fromdate=${formatDate(toprofessor)}&todate=${formatDate(nextWeek)}`,
     fetcher,
   );
   if (error) return <div className="text-white">Failed to load schedules</div>;
@@ -24,10 +24,14 @@ const ScheduleFetcher = () => {
     <div className="p-5">
       {schedules.map((professor, index) => professor.Count > 0 && (
         <div key={index} className="mb-4 p-6 rounded-lg shadow">
+          <div className="flex justify-normal">
+          <div className="mb-6 font-bold text-lg text-white">{professor.Lessons[0].lecturer}</div>
+          </div>
           {professor.Lessons.map((lesson, idx) => (
-            <div key={idx} className="flex justify-between items-center border-b border-gray-300 py-3">
+            <div key={idx} className="flex justify-between items-center border-b border-gray-300 py-3 w-1/2">
               <div className="font-bold text-lg text-white">
-                {lesson.beginLesson} - {lesson.endLesson}
+                <p>{lesson.beginLesson} - {lesson.endLesson}</p>
+                <p>{lesson.date}</p>
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-white">{lesson.discipline}</h3>
