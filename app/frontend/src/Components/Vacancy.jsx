@@ -24,7 +24,7 @@ const Vacancies = () => {
     <div className="flex justify-center h-screen">
       <div className="bg-black text-white p-4 w-3/4 md:4/5">
         <div className="flex justify-start">
-        <h2 className="text-5xl text-center mb-8">Вакансии</h2>
+        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center flex-1">Вакансии</h1>
         </div>
         <div className="flex flex-wrap justify-center gap-4 p-4">
           {jobs.map((job) => (
