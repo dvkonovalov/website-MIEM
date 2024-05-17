@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import hseimage from '../Assets/hse.png';
 import googleimage from '../Assets/google.png';
-import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -10,8 +10,14 @@ const AuthorizationForm = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [cookies] = useCookies(['csrfToken']);
   const navigate = useNavigate();
+
+  function getCsrfToken() {
+    return Cookies.get('csrftoken');
+  }
+
+  const csrfToken = getCsrfToken();
+
 
   const submit = (e) => {
     e.preventDefault();
@@ -19,7 +25,7 @@ const AuthorizationForm = () => {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': cookies.csrfToken
+        'X-CSRFToken': csrfToken,
       },
       body: JSON.stringify({
         username: username,
