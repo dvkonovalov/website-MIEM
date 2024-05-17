@@ -8,6 +8,8 @@ urlpatterns = [
     path('recrutement/', views.index),
     path('signin/', views.index),
     path('schedule/', views.index),
+    path('useful_links/', views.index),
+
 
 
 ]

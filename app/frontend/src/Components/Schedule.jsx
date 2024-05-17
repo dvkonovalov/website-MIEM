@@ -28,14 +28,13 @@ const ScheduleFetcher = () => {
           <div className="mb-6 font-bold text-lg text-white">{professor.Lessons[0].lecturer}</div>
           </div>
           {professor.Lessons.map((lesson, idx) => (
-            <div key={idx} className="flex justify-between items-center border-b border-gray-300 py-3 w-1/2">
+            <div key={idx} className="flex justify-between items-center border-b border-gray-300 py-3">
               <div className="font-bold text-lg text-white">
                 <p>{lesson.beginLesson} - {lesson.endLesson}</p>
                 <p>{lesson.date}</p>
               </div>
-              <div>
+              <div className='w-1/2'>
                 <h3 className="text-lg font-semibold text-white">{lesson.discipline}</h3>
-                <p className="text-white">{lesson.lecturer} ({lesson.lecturer_rank})</p>
                 <p className="text-white">Аудитория: {lesson.auditorium}, {lesson.building}</p>
               </div>
             </div>

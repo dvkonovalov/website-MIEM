@@ -1,11 +1,51 @@
-import React from 'react';
+import React, {useState} from 'react';
 import hseimage from '../Assets/hse.png';
 import googleimage from '../Assets/google.png';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const AuthorizationForm = () => {
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const submit = (e) => {
+    e.preventDefault();
+    fetch("http://127.0.0.1:7000/signin", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password
+      }),
+    })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Server response not OK');
+      }
+    })
+    .then((result) => {
+      if (result.message === "SUCCESS") {
+        alert("You are logged in.");
+        navigate('/');
+      } else {
+        alert("Please check your login information.");
+      }
+    })
+    .catch((error) => {
+      console.error('Login failed:', error);
+      alert("Login failed: " + error.message);
+    });
+  }
+  
   return (
-    <div className="flex justify-center h-screen bg-black text-white w-full mt-12">
+    <form className="flex justify-center h-screen bg-black text-white w-full mt-12">
       <div className="w-3/4 max-w-md">
         <h1 className="text-5xl font-extrabold text-center mb-12">Авторизация</h1>
         <div className="flex flex-col items-center justify-between mb-8 space-y-4">
@@ -30,7 +70,8 @@ const AuthorizationForm = () => {
             type="text"
             placeholder="Почта"
             className="w-full p-2 text-white bg-black border border-custom-gray"
-          />
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}/>
         </div>
         <div className="mb-6">
           <input
@@ -38,15 +79,18 @@ const AuthorizationForm = () => {
             type="password"
             placeholder="Пароль"
             className="w-full p-2 text-white bg-black border border-custom-gray"
-          />
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}/>
         </div>
         <div className="flex justify-center">
-          <button className="w-1/4 border-4 border-white text-white py-2">
+          <button 
+            className="w-1/4 border-4 border-white text-white py-2"
+            onClick={submit}>
             Войти
           </button>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

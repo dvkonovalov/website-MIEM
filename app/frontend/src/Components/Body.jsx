@@ -7,7 +7,7 @@ const Body = () => {
         <>
         <div className="flex flex-col justify-center items-center text-white py-20 px-4">
             <h1 className="text-3xl md:text-5xl font-bold mb-3">Лаборатория</h1>
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">Сетевых Видеотехнологий</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Сетевых Технологий</h2>
             <p className="font-light opacity-80 text-base md:text-xl font-semibold">Мы занимаемся этим-этим</p>
             <p className="font-light opacity-80 text-base md:text-xl font-semibold">у нас круто классно</p>
         </div>
@@ -66,7 +66,7 @@ const Body = () => {
                                     <h2 className="text-4xl md:text-6xl font-bold">Методички</h2>
                                 </div>
                                 <div className="relative ml-3">
-                                    <a href="/materials">
+                                    <a href="/material">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white absolute bottom-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                                     </svg>
@@ -131,7 +131,7 @@ const Body = () => {
         </div>
 
         <div className="flex justify-center w-full">
-        <div className="bg-black text-white p-5 w-3/4 flex justify-around items-stretch space-x-2">
+        <div className="bg-black text-white p-5 w-3/4 flex flex-wrap justify-center gap-4 p-4 w-full">
             <div className="flex-1 p-5 border border-gray-500 rounded space-y-2">
                 <h2 className="text-2xl font-bold mb-2">(01)</h2>
                 <p className="text-sm">
@@ -167,9 +167,11 @@ const Body = () => {
         <div className="flex flex-cols text-white justify-center py-8">
             <h2 className="text-4xl font-bold">Новости</h2>
         </div>
-
-        <NewsCarousel/>
-
+        <div className="flex justify-center w-full">
+            <div className="w-5/6">
+                <NewsCarousel/>
+            </div>
+        </div>
             
             </>
 

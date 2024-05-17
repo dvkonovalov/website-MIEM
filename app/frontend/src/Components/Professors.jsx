@@ -28,7 +28,7 @@ const ProfessorsList = () => {
 
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full justify-center">
+    <div className="flex flex-wrap justify-center gap-4 p-4 w-full">
     {professors.map((professor) => (
         <div key={professor.id} className="flex flex-col items-center p-4">
             <img

@@ -65,9 +65,9 @@ const NewsCarousel = () => {
               <div className="grid grid-cols-2 border border-custom-gray">
                 <div className="flex-1 p-4 bg-black text-white w-64">
                   <h2 className="text-xl mb-4">{slide.title}</h2>
-                  <p>{slide.description}</p>
+                  <p>{slide.description.length > 140 ? `${slide.description.slice(0, 140)}...` : slide.description}</p>
                 </div>
-                <div className="flex-1 max-w-sm w-64">
+                <div className="flex-1 max-w-sm w-64 hidden md:block">
                   <img src={slide.photo} alt="Server Image" className="object-cover h-72 w-full"/>
                 </div>
               </div>

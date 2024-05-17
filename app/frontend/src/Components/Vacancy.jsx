@@ -26,9 +26,9 @@ const Vacancies = () => {
         <div className="flex justify-start">
         <h2 className="text-5xl text-center mb-8">Вакансии</h2>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="flex flex-wrap justify-center gap-4 p-4">
           {jobs.map((job) => (
-            <div key={job.id} className="flex flex-col h-72 md:h-96 p-2 border border-custom-gray justify-between">
+            <div key={job.id} className="flex flex-col w-48 md:w-64 md:h-72 md:h-96 p-2 border border-custom-gray justify-between">
               <div>
                 <h3 className="text-2xl mb-2 font-bold">{job.title}</h3>
                 <ul className="mb-4">

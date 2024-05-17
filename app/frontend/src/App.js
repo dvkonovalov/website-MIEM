@@ -12,6 +12,7 @@ import Labs from './Components/Labs';
 import Vacancies from './Components/Vacancy';
 import AuthorizationForm from './Components/Signin';
 import ScheduleFetcher from './Components/Schedule';
+import Useful_links from './Components/Useful';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/recrutement" element={<Vacancies />} />
           <Route path="/signin" element={<AuthorizationForm />} />
           <Route path="/schedule" element={<ScheduleFetcher />} />
+          <Route path="/useful_links" element={<Useful_links />} />
         </Routes>
       </div>
     </Router>
