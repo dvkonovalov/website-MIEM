@@ -19,7 +19,7 @@ const AuthorizationForm = () => {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
-        'CSRF-Token': cookies.csrfToken
+        'X-CSRF-TOKEN': cookies.csrfToken
       },
       body: JSON.stringify({
         username: username,
