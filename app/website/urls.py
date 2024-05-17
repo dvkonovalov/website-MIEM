@@ -24,10 +24,9 @@ urlpatterns = [
     path('labs/', include('core.urls')),
     path('material/', include('core.urls')),
     path('recrutement/', include('core.urls')),
-    path('signin/', include('core.urls')),
     path('schedule/', include('core.urls')),
     path('useful_links/', include('core.urls')),
-
-
+    path('signin/', include('core.urls')),
+    path('signout/', include('core.urls')),
 
 ]

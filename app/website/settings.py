@@ -61,7 +61,7 @@ ROOT_URLCONF = 'website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'frontend', 'build')],       # Добалено
+        'DIRS': [os.path.join(BASE_DIR, 'frontend', 'build'), os.path.join(BASE_DIR, 'website', 'core')],       # Добалено
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,15 +80,13 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:7000',
 ]
 
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:7000']
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR,'db.sqlite3'),
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
