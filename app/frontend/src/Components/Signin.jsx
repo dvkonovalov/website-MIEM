@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import hseimage from '../Assets/hse.png';
 import googleimage from '../Assets/google.png';
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -9,6 +10,7 @@ const AuthorizationForm = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [cookies] = useCookies(['csrfToken']);
   const navigate = useNavigate();
 
   const submit = (e) => {
@@ -16,7 +18,8 @@ const AuthorizationForm = () => {
     fetch("http://127.0.0.1:7000/signin", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'CSRF-Token': cookies.csrfToken
       },
       body: JSON.stringify({
         username: username,
