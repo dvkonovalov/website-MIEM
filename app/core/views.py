@@ -1,22 +1,24 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import logout, login, authenticate
+import json
 
 
 def login_view(request):
-    print('\n\n\nTUT\n\n\n')
     if request.method == "GET":
         context = {}
         return render(request, "index.html", context)
     elif request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["password"]
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        username = body["username"]
+        password = body["password"]
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponse('Success', code=200)
+            return HttpResponse('Success', status=200)
         else:
-            HttpResponse('Unauthorized', code=401)
+            return HttpResponse('Unauthorized', status=401)
 
 
 def logout_view(request):

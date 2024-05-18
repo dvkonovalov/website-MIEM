@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import hseimage from '../Assets/hse.png';
 import googleimage from '../Assets/google.png';
+import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -11,12 +12,25 @@ const AuthorizationForm = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  function getCsrfToken() {
+    return Cookies.get('csrftoken');
+  }
+
+  const csrftoken = document.cookie
+    .split(';')
+    .find((c) => c.trim().startsWith('csrftoken='))
+    ?.replace('csrftoken=', '');
+
+
   const submit = (e) => {
     e.preventDefault();
-    fetch("http://127.0.0.1:7000/signin", {
+    fetch("http://127.0.0.1:8000/signin/", {
       method: "POST",
+      mode: 'same-origin',
+      credentials: 'same-origin',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken,
       },
       body: JSON.stringify({
         username: username,
@@ -43,7 +57,7 @@ const AuthorizationForm = () => {
       alert("Login failed: " + error.message);
     });
   }
-  
+
   return (
     <form className="flex justify-center h-screen bg-black text-white w-full mt-12">
       <div className="w-3/4 max-w-md">
@@ -83,7 +97,7 @@ const AuthorizationForm = () => {
             onChange={(e) => setPassword(e.target.value)}/>
         </div>
         <div className="flex justify-center">
-          <button 
+          <button
             className="w-1/4 border-4 border-white text-white py-2"
             onClick={submit}>
             Войти

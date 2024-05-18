@@ -14,7 +14,7 @@ const ScheduleFetcher = () => {
   };
 
   const { data: schedules, error } = useSWR(
-    `http://127.0.0.1:7000/api/schedule/?fromdate=${formatDate(toprofessor)}&todate=${formatDate(nextWeek)}`,
+    `http://127.0.0.1:8000/api/schedule/?fromdate=${formatDate(toprofessor)}&todate=${formatDate(nextWeek)}`,
     fetcher,
   );
   if (error) return <div className="text-white">Failed to load schedules</div>;

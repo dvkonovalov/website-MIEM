@@ -44,7 +44,7 @@ const NewsCarousel = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:7000/api/news/');
+        const response = await fetch('http://127.0.0.1:8000/api/news/');
         const data = await response.json();
         setslidesData(data);
       } catch (error) {
