@@ -83,7 +83,7 @@ const Navbar = () => {
           <a href="/material" className="hover:text-gray-300">Методички</a>
           <a href="/schedule" className="hover:text-gray-300">Расписание</a>
           <a href="/useful_links" className="hover:text-gray-300">Ссылки</a>
-          <a href="/server" className="hover:text-gray-300">Сервера</a>
+          <a href="/wetty" className="hover:text-gray-300">Сервера</a>
           <a href="/recrutement" className="hover:text-gray-300">Вакансии</a>
         </div>
         {/* Placeholder on the right for balance */}

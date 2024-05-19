@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login, authenticate
 import json
 
@@ -28,6 +28,10 @@ def logout_view(request):
     elif request.method == "POST":
         logout(request)
         return HttpResponse('Success', code=200)
+
+def redirect_to_server(request):
+    # Redirect to an external URL
+    return redirect('http://127.0.0.1:3000/wetty')
 
 
 # Create your views here.
