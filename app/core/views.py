@@ -16,9 +16,9 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponse('Success', status=200)
+            return HttpResponse(headers={'Authorization': 'Success'}, status=200)
         else:
-            return HttpResponse('Unauthorized', status=401)
+            return HttpResponse(headers={'Authorization': 'Unauthorized'}, status=401)
 
 
 def logout_view(request):
@@ -27,7 +27,8 @@ def logout_view(request):
         return render(request, "index.html", context)
     elif request.method == "POST":
         logout(request)
-        return HttpResponse('Success', code=200)
+        return HttpResponse(headers={'Authorization': 'Success'}, code=200)
+
 
 def redirect_to_server(request):
     # Redirect to an external URL
