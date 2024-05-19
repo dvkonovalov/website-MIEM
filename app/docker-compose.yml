@@ -1,12 +1,21 @@
 services:
   app:
     build: .
+    networks:
+      - internal_network
+
 
   wetty:
     image: wettyoss/wetty
     restart: unless-stopped
     environment:
       - TERM=xterm-256color
+    ports:
+      - 3000:3000
+    networks:
+      - internal_network
+
+
 
   nginx:
     image: nginx:alpine
@@ -18,3 +27,9 @@ services:
       - app
       - wetty
     restart: always
+    networks:
+      - internal_network
+
+networks:
+  internal_network:
+    driver: bridge

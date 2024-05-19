@@ -3,6 +3,7 @@ import hseimage from '../Assets/hse.png';
 import googleimage from '../Assets/google.png';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext'
 
 
 
@@ -11,6 +12,8 @@ const AuthorizationForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth();
+
 
   function getCsrfToken() {
     return Cookies.get('csrftoken');
@@ -43,6 +46,7 @@ const AuthorizationForm = () => {
       if (result.message === "SUCCESS") {
         alert("You are logged in.");
         navigate('/');
+        login();
       } else {
         alert("Please check your login information.");
       }
@@ -98,6 +102,10 @@ const AuthorizationForm = () => {
             Войти
           </button>
         </div>
+        <div className="flex justify-center mt-1">
+          <a href="/signup" className="text-white text-sm">Зарегистрироваться</a>
+        </div>
+
       </div>
     </form>
   );
