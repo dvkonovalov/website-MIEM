@@ -88,6 +88,7 @@ class Skill(models.Model):
     def __str__(self):
         return self.name
 
+
 class Vacancy(models.Model):
     class Meta:
         verbose_name = 'Вакансия'
@@ -110,6 +111,7 @@ class Vacancy(models.Model):
 
     def get_skills_list(self):
         return [skill.name for skill in self.skills.all()]
+
 
 class Material(models.Model):
     class Meta:
@@ -157,6 +159,33 @@ class Work(models.Model):
     file: models.FileField = models.FileField(
         upload_to='works',
         verbose_name='Файл',
+    )
+
+    def __str__(self):
+        return self.title
+
+
+class Link(models.Model):
+    class Meta:
+        verbose_name_plural = 'Полезные ресурсы'
+        verbose_name = 'Полезный ресурс'
+
+    title: models.CharField = models.CharField(
+        max_length=50,
+        blank=False,
+        verbose_name='Название ресурса',
+    )
+
+    description: models.CharField = models.CharField(
+        max_length=500,
+        blank=True,
+        verbose_name='Краткое описание',
+    )
+
+    link: models.CharField = models.CharField(
+        max_length=500,
+        blank=False,
+        verbose_name='Ссылка',
     )
 
     def __str__(self):

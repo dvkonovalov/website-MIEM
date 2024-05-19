@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Professors, News, Vacancy, Material, Work
+from core.models import Professors, News, Vacancy, Material, Work, Link
 
 
 class ProfessorSerializers(serializers.ModelSerializer):
@@ -29,4 +29,9 @@ class MaterialSerializers(serializers.ModelSerializer):
 class WorkSerializers(serializers.ModelSerializer):
     class Meta:
         model = Work
+        fields = '__all__'
+
+class LinkSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Link
         fields = '__all__'

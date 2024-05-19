@@ -26,9 +26,7 @@ urlpatterns = [
     path('recrutement/', include('core.urls')),
     path('schedule/', include('core.urls')),
     path('useful_links/', include('core.urls')),
-    path('signin/', include('core.urls')),
-    path('signout/', include('core.urls')),
-    path('signup/', include('core.urls')),
+    path('account/', include('core.urls')),
     path('wetty/', include('core.urls')),
 
 

@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children, onlyUnauthenticated = false }) => {
   if (onlyUnauthenticated && isAuthenticated) {
     return <Navigate to="/" replace />;
   } else if (!onlyUnauthenticated && !isAuthenticated) {
-    return <Navigate to="/signin" replace />;
+    return <Navigate to="/account/login" replace />;
   }
 
   return children;

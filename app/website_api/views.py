@@ -3,8 +3,8 @@ from rest_framework import viewsets
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 
-from core.models import Professors, News, Vacancy, Material
-from .serializers import ProfessorSerializers, NewsSerializers, VacancySerializers, MaterialSerializers
+from core.models import Professors, News, Vacancy, Material, Link
+from .serializers import ProfessorSerializers, NewsSerializers, VacancySerializers, MaterialSerializers, LinkSerializers
 
 HSE_TIMETABLE_API_REQUEST_TEMPLATE = (
     ''
@@ -32,6 +32,12 @@ class MaterialApi(viewsets.ModelViewSet):
     http_method_names = ['get']
     queryset = Material.objects.all()
     serializer_class = MaterialSerializers
+
+
+class LinkApi(viewsets.ModelViewSet):
+    http_method_names = ['get']
+    queryset = Link.objects.all()
+    serializer_class = LinkSerializers
 
 
 def getschedule(request):

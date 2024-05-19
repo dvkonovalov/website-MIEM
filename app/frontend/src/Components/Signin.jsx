@@ -14,11 +14,6 @@ const AuthorizationForm = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-
-  function getCsrfToken() {
-    return Cookies.get('csrftoken');
-  }
-
   const csrftoken = document.cookie
     .split(';')
     .find((c) => c.trim().startsWith('csrftoken='))
@@ -27,7 +22,7 @@ const AuthorizationForm = () => {
 
   const submit = (e) => {
     e.preventDefault();
-    fetch("http://127.0.0.1:8000/signin/", {
+    fetch("http://127.0.0.1:8000/account/login/", {
       method: "POST",
       mode: 'same-origin',
       credentials: 'same-origin',
@@ -108,7 +103,7 @@ const AuthorizationForm = () => {
           </button>
         </div>
         <div className="flex justify-center mt-1">
-          <a href="/signup" className="text-white text-sm">Зарегистрироваться</a>
+          <a href="/account/signup" className="text-white text-sm">Зарегистрироваться</a>
         </div>
 
       </div>

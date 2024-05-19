@@ -6,6 +6,7 @@ from .models import (
     Vacancy,
     Material,
     Work,
+    Link
 )
 
 # Register your models here.
@@ -15,3 +16,4 @@ admin.site.register(Skill)
 admin.site.register(Vacancy)
 admin.site.register(Material)
 admin.site.register(Work)
+admin.site.register(Link)
