@@ -1,6 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login, authenticate
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, PasswordResetCompleteView, PasswordResetDoneView
 import json
 
 
@@ -30,7 +34,34 @@ def logout_view(request):
         return HttpResponse(headers={'Authorization': 'Success'}, code=200)
 
 
-def redirect_to_server(request):
+class SignUp(CreateView):
+    form_class = UserCreationForm
+    template_name = "signup.html"
+
+
+class PasswordReset(PasswordResetView):
+    template_name = 'password_reset.html'
+    email_template_name = 'password_reset_email.html'
+    subject_template_name = 'password_reset_subject.txt'
+    success_message = "We've emailed you instructions for setting your password, " \
+                      "if an account exists with the email you entered. You should receive them shortly." \
+                      " If you don't receive an email, " \
+                      "please make sure you've entered the address you registered with, and check your spam folder."
+    #success_url = reverse_lazy('account:password_reset_done')
+
+
+class PasswordResetConfirm(PasswordResetConfirmView):
+    template_name = 'password_reset_confirm.html'
+
+class PasswordResetComplete(PasswordResetCompleteView):
+    template_name = 'password_reset_complete.html'
+
+
+class PasswordResetDone(PasswordResetDoneView):
+    template_name = 'password_reset_done.html'
+
+
+def redirect_to_dist_serv(request):
     # Redirect to an external URL
     return redirect('http://127.0.0.1:3000/wetty')
 
