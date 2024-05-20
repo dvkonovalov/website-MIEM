@@ -22,7 +22,7 @@ const AuthorizationForm = () => {
 
   const submit = (e) => {
     e.preventDefault();
-    fetch("http://127.0.0.1:8000/account/login/", {
+    fetch("http://127.0.0.1:7000/account/login/", {
       method: "POST",
       mode: 'same-origin',
       credentials: 'same-origin',
@@ -103,7 +103,10 @@ const AuthorizationForm = () => {
           </button>
         </div>
         <div className="flex justify-center mt-1">
-          <a href="/account/signup" className="text-white text-sm">Зарегистрироваться</a>
+          <a href="/signup" className="text-white text-sm">Зарегистрироваться</a>
+        </div>
+        <div className="flex justify-center mt-1">
+          <a href="/forgot_password" className="text-white text-sm">Забыли пароль?</a>
         </div>
 
       </div>

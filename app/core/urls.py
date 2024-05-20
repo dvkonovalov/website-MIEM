@@ -8,6 +8,8 @@ urlpatterns = [
     path('recrutement/', views.index),
     path('schedule/', views.index),
     path('useful_links/', views.index),
+    path('signin/', views.index),
+    path('signup/', views.index),
     path('wetty/', views.redirect_to_dist_serv),
     path('account/login/', views.login_view, name='login'),
     path('account/signup/', views.SignUp.as_view()),

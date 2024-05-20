@@ -37,7 +37,7 @@ def logout_view(request):
 class SignUp(CreateView):
     form_class = UserCreationForm
     template_name = "signup.html"
-
+    success_url = reverse_lazy('login')
 
 class PasswordReset(PasswordResetView):
     template_name = 'password_reset.html'

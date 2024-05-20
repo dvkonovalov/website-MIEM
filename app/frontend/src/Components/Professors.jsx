@@ -11,7 +11,7 @@ const ProfessorsList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/professors/');
+        const response = await fetch('http://127.0.0.1:7000/api/professors/');
         const data = await response.json();
         setprofessors(data);
       } catch (error) {

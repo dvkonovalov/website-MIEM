@@ -8,7 +8,7 @@ const Vacancies = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/vacancy/');
+        const response = await fetch('http://127.0.0.1:7000/api/vacancy/');
         const data = await response.json();
         setjobs(data);
       } catch (error) {

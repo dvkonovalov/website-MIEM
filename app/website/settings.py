@@ -82,6 +82,9 @@ CORS_ALLOWED_ORIGINS = [
 
 ]
 
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:7000']
+
+
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
