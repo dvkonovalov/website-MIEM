@@ -10,7 +10,7 @@ urlpatterns = [
     path('useful_links/', views.index),
     path('signin/', views.index),
     path('signup/', views.index),
-    #path('wetty/', views.redirect_to_dist_serv),
+    path('wetty/', views.redirect_to_dist_server),
     path('account/login/', views.login_view, name='login'),
     path('account/logout/', views.logout_view),
     path('account/signup/', views.sign_up),
