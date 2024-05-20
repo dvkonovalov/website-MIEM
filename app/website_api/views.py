@@ -96,3 +96,14 @@ def getfile(request, folder, file_name):
             return HttpResponse(f.read(), content_type=f"{type_file}/{extension}")
     except Exception:
         return HttpResponseNotFound("<h1>Image not found</h1>")
+
+
+def get_status(request):
+    response = dict()
+    if request.user.is_authenticated:
+        response['authorized'] = 'true'
+        response['username'] = str(request.user)
+        return JsonResponse(response, safe=False)
+    else:
+        response['authorized'] = 'false'
+        return JsonResponse(response, safe=False)

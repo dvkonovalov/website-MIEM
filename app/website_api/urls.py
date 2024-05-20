@@ -14,5 +14,6 @@ router.register('useful_links', views.LinkApi)
 
 urlpatterns = [
     path('media/<str:folder>/<str:file_name>', views.getfile),
-    path('schedule/', views.getschedule)
+    path('schedule/', views.getschedule),
+    path('status_user/', views.get_status)
 ] + router.urls
