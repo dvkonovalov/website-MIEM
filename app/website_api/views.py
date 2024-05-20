@@ -103,6 +103,10 @@ def get_status(request):
     if request.user.is_authenticated:
         response['authorized'] = 'true'
         response['username'] = str(request.user)
+        if request.user.groups.filter(name='Удаленный дотсуп').exists():
+            response['remote_access'] = 'true'
+        else:
+            response['remote_access'] = 'false'
         return JsonResponse(response, safe=False)
     else:
         response['authorized'] = 'false'
