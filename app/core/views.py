@@ -1,17 +1,14 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login, authenticate
-from django.urls import reverse_lazy
-from django.views.generic import CreateView
-from django.contrib.auth.forms import UserCreationForm
+from .forms import RegisterForm
 from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, PasswordResetCompleteView, PasswordResetDoneView
 import json
 
 
 def login_view(request):
     if request.method == "GET":
-        context = {}
-        return render(request, "index.html", context)
+        return redirect('http://127.0.0.1:8000/signin/')
     elif request.method == "POST":
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
@@ -27,17 +24,26 @@ def login_view(request):
 
 def logout_view(request):
     if request.method == "GET":
-        context = {}
-        return render(request, "index.html", context)
+        return redirect('http://127.0.0.1:8000/logout/')
     elif request.method == "POST":
         logout(request)
         return HttpResponse(headers={'Authorization': 'Success'}, code=200)
 
 
-class SignUp(CreateView):
-    form_class = UserCreationForm
-    template_name = "signup.html"
-    success_url = reverse_lazy('login')
+def sign_up(request):
+    if request.method == 'GET':
+        return redirect('http://127.0.0.1:8000/signup/')
+    elif request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            login(request, user)
+            return HttpResponse(status=200, headers={'registration': 'Success'})
+        else:
+            return HttpResponse(status=401, headers={'registration': 'Data invalid'})
+
 
 class PasswordReset(PasswordResetView):
     template_name = 'password_reset.html'
@@ -52,6 +58,8 @@ class PasswordReset(PasswordResetView):
 
 class PasswordResetConfirm(PasswordResetConfirmView):
     template_name = 'password_reset_confirm.html'
+
+
 
 class PasswordResetComplete(PasswordResetCompleteView):
     template_name = 'password_reset_complete.html'

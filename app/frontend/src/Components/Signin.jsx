@@ -22,7 +22,7 @@ const AuthorizationForm = () => {
 
   const submit = (e) => {
     e.preventDefault();
-    fetch("http://127.0.0.1:7000/account/login/", {
+    fetch("http://127.0.0.1:8000/account/login/", {
       method: "POST",
       mode: 'same-origin',
       credentials: 'same-origin',
