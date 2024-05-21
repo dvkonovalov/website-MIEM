@@ -1,7 +1,8 @@
 import React from 'react';
 
 
-const RegisterForm = () => {
+const ResetPassword = () => {
+  
   return (
     <form className="flex justify-center h-screen bg-black text-white w-full mt-12">
         <div className="w-3/4 max-w-md">
@@ -25,4 +26,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default ResetPassword;

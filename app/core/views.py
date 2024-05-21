@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login, authenticate
 from .forms import RegisterForm
@@ -8,7 +8,7 @@ import json
 
 def login_view(request):
     if request.method == "GET":
-        return redirect('http://127.0.0.1:8000/signin/')
+        return redirect('http://127.0.0.1:7000/signin')
     elif request.method == "POST":
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
@@ -17,32 +17,39 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponse(headers={'Authorization': 'Success'}, status=200)
+            return JsonResponse({'Authorization': 'Success'}, status=200)
         else:
-            return HttpResponse(headers={'Authorization': 'Unauthorized'}, status=401)
+            return JsonResponse({'Authorization': 'Unauthorized'}, status=401)
 
 
 def logout_view(request):
     if request.method == "GET":
-        return redirect('http://127.0.0.1:8000/logout/')
+        return redirect('http://127.0.0.1:7000/logout')
     elif request.method == "POST":
         logout(request)
-        return HttpResponse(headers={'Authorization': 'Success'}, code=200)
+        return JsonResponse({'Authorization': 'Success'}, status=200)
 
 
 def sign_up(request):
     if request.method == 'GET':
-        return redirect('http://127.0.0.1:8000/signup/')
+        return redirect('http://127.0.0.1:7000/signup')
     elif request.method == 'POST':
-        form = RegisterForm(request.POST)
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        form = RegisterForm({
+            'username': body['username'],
+            'password': body['password'],
+        })
+        
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
             login(request, user)
-            return HttpResponse(status=200, headers={'registration': 'Success'})
+            return JsonResponse({'message': 'SUCCESS'}, status=200)
         else:
-            return HttpResponse(status=401, headers={'registration': 'Data invalid'})
+            return JsonResponse({'message': 'Data invalid'}, status=401)
+    return HttpResponse(status=405)
 
 
 class PasswordReset(PasswordResetView):

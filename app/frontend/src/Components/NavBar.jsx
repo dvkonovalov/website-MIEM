@@ -1,72 +1,35 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
+import useUserStatus from './UseUserStatus';
 
 const Navbar = () => {
-  const [user, setUser] = useState(null);
-  const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { userStatus, isSessionValid, hasRemoteAccess } = useUserStatus();
 
-
-  useEffect(() => {
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      setUser(JSON.parse(userData));
-    }
-  }, []);
-
-  const handleSignIn = async (username, password) => {
-    setLoading(true);
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username, password })
-      });
-      const data = await response.json();
-      if (response.ok) {
-        setUser(data.user);
-        localStorage.setItem('user', JSON.stringify(data.user)); // Save user data for session persistence
-        alert("You are logged in.");
-      } else {
-        alert(data.message || "Authentication failed.");
-      }
-    } catch (error) {
-      alert("Network error");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleLogOut = async () => {
-    setLoading(true);
     try {
-      const response = await fetch('http://127.0.0.1:7000/api/logout', {
-        method: 'POST',
+      await axios.post('http://127.0.0.1:7000/account/logout/', {}, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${user?.token}`
-        }
-      });
-      if (response.ok) {
-        setUser(null);
-        localStorage.removeItem('user');
-        alert("You are logged out.");
-      } else {
-        alert("Log out failed.");
-      }
+          'X-CSRFToken': document.cookie
+            .split(';')
+            .find((c) => c.trim().startsWith('csrftoken='))
+            ?.split('=')[1],
+        }});
+
+      navigate('/');
+      window.location.reload();
     } catch (error) {
-      alert("Network error");
-    } finally {
-      setLoading(false);
+      console.error('Logout failed:', error);
+      alert('Logout failed: ' + error.message);
     }
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const handleNoAccess = () => {
+    alert("You don't have access to the servers");
+  };
 
   return (
     <nav className="bg-black text-white p-4">
@@ -83,20 +46,24 @@ const Navbar = () => {
           <a href="/material" className="hover:text-gray-300">Методички</a>
           <a href="/schedule" className="hover:text-gray-300">Расписание</a>
           <a href="/useful_links" className="hover:text-gray-300">Ссылки</a>
-          <a href="/wetty" className="hover:text-gray-300">Сервера</a>
+          {isSessionValid && hasRemoteAccess ? (
+            <a href="/wetty" className="hover:text-gray-300">Сервера</a>
+          ) : (
+            <a onClick={handleNoAccess} className="hover:text-gray-300 cursor-pointer">Сервера</a>
+          )}
           <a href="/recrutement" className="hover:text-gray-300">Вакансии</a>
         </div>
-        {/* Placeholder on the right for balance */}
+        {/* User info or Sign In button */}
         <div>
-        {user ? (
-          <>
-            <span className="mr-4">{user.username}</span>
-            <button onClick={handleLogOut} className="hover:text-gray-300 ">Log Out</button>
-          </>
-        ) : (
-          <button onClick={() => navigate('/signin')} className="hover:text-gray-300 ">Sign In</button>
-        )}
-      </div>
+          {isSessionValid ? (
+            <>
+              <span className="mr-4">{userStatus.username}</span>
+              <button onClick={handleLogOut} className="hover:text-gray-300">Log Out</button>
+            </>
+          ) : (
+            <button onClick={() => navigate('/signin')} className="hover:text-gray-300">Sign In</button>
+          )}
+        </div>
       </div>
     </nav>
   );

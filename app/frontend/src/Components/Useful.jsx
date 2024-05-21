@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Useful_links = () => {
+  const [resources, setResources] = useState([]);
 
-  const resources = [
-    { id: 1, link: 'https://example.com/resource1', title: 'Resource 1'},
-    { id: 2, link: 'https://example.com/resource2', title: 'Resource 2'},
-    { id: 3, link: 'https://example.com/resource3', title: 'Resource 3'},
-  ];
+  useEffect(() => {
+    const fetchResources = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:7000/api/useful_links');
+        const data = await response.json();
+        setResources(data);
+      } catch (error) {
+        console.error('Error fetching resources:', error);
+      }
+    };
+
+    fetchResources();
+  }, []);
 
   return (
     <div className="flex flex-wrap justify-center gap-4 p-4 mt-8">
