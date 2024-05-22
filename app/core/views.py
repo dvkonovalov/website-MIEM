@@ -34,22 +34,26 @@ def sign_up(request):
     if request.method == 'GET':
         return redirect('http://127.0.0.1:7000/signup')
     elif request.method == 'POST':
-        body_unicode = request.body.decode('utf-8')
-        body = json.loads(body_unicode)
-        form = RegisterForm({
-            'username': body['username'],
-            'password': body['password'],
-        })
-        
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
-            login(request, user)
-            return JsonResponse({'message': 'SUCCESS'}, status=200)
-        else:
-            return JsonResponse({'message': 'Data invalid'}, status=401)
+        try:
+            body_unicode = request.body.decode('utf-8')
+            body = json.loads(body_unicode)
+            form = RegisterForm({
+                'username': body['username'],
+                'password': body['password'],
+            })
+            
+            if form.is_valid():
+                user = form.save(commit=False)
+                user.username = user.username.lower()
+                user.save()
+                login(request, user)
+                return HttpResponse(body= {'message': 'SUCCESS'}, status=200)
+            else:
+                return HttpResponse(body= {'message':'Data invalid'}, status=400)
+        except Exception as e:
+            return JsonResponse({'message': str(e)}, status=500)
     return HttpResponse(status=405)
+
 
 
 class PasswordReset(PasswordResetView):

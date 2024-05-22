@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
-  const [username, setusername] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
@@ -37,6 +37,7 @@ const RegisterForm = () => {
         body: JSON.stringify({
           username: username,
           password: password,
+          confirmPassword: confirmPassword,
         }),
       });
 
@@ -46,7 +47,7 @@ const RegisterForm = () => {
 
       const result = await response.json();
 
-      if (result.message === "SUCCESS") {
+      if (response.status === 200) {
         alert('You are registered successfully.');
         navigate('/');
       } else {
@@ -66,10 +67,10 @@ const RegisterForm = () => {
           <input
             id="username"
             type="text"
-            placeholder="Почта"
+            placeholder="Username"
             className="w-full p-2 text-white bg-black border border-custom-gray"
             value={username}
-            onChange={(e) => setusername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
         </div>

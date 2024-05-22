@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { ChevronRightIcon } from '@heroicons/react/solid';
+import { ChevronRightIcon } from '@heroicons/react/24/solid';
 
 const Labs = () => {
   const [reports, setReports] = useState([]);
