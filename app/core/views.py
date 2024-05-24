@@ -64,7 +64,6 @@ class PasswordReset(PasswordResetView):
                       "if an account exists with the email you entered. You should receive them shortly." \
                       " If you don't receive an email, " \
                       "please make sure you've entered the address you registered with, and check your spam folder."
-    #success_url = reverse_lazy('account:password_reset_done')
 
 
 class PasswordResetConfirm(PasswordResetConfirmView):
@@ -81,10 +80,10 @@ class PasswordResetDone(PasswordResetDoneView):
 
 
 def redirect_to_dist_server(request):
-    if request.user.is_authenticated and request.user.groups.filter(name='Удаленный дотсуп').exists():
-        return redirect('http://127.0.0.1:3000/wetty')
+    if request.user.is_authenticated and request.user.groups.filter(name='Удаленный доступ').exists():
+        return redirect('http://127.0.0.1:3000/wetty/')
     else:
-        return redirect('http://127.0.0.1:3000/signin')
+        return redirect('http://127.0.0.1:7000/signin/')
 
 
 # Create your views here.
