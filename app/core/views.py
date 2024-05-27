@@ -82,12 +82,6 @@ class PasswordResetDone(PasswordResetDoneView):
     template_name = 'password_reset_done.html'
 
 
-def redirect_to_dist_server(request):
-    if request.user.is_authenticated and request.user.groups.filter(name='Удаленный доступ').exists():
-        return redirect('http://127.0.0.1:3000/wetty/')
-    else:
-        return redirect('http://127.0.0.1:8000/signin/')
-
 
 # Create your views here.
 def index(request):
