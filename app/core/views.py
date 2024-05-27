@@ -32,7 +32,8 @@ def logout_view(request):
 
 def sign_up(request):
     if request.method == 'GET':
-        return redirect('http://127.0.0.1:7000/signup')
+        context = {}
+        return render(request, "index.html", context)
     elif request.method == 'POST':
         try:
             body_unicode = request.body.decode('utf-8')

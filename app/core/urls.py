@@ -8,7 +8,7 @@ urlpatterns = [
     path('recrutement/', views.index),
     path('schedule/', views.index),
     path('useful_links/', views.index),
-    path('signin/', views.index),
+    path('signin/', views.sign_up),
     path('signup/', views.index),
     path('forgot_password/', views.index),
     path('wetty/', views.redirect_to_dist_server),
