@@ -39,7 +39,9 @@ def sign_up(request):
             body = json.loads(body_unicode)
             form = RegisterForm({
                 'username': body['username'],
-                'password': body['password'],
+                'password1': body['password1'],
+                'password2': body['password2'],
+                'email': body['email']
             })
             
             if form.is_valid():
@@ -83,7 +85,7 @@ def redirect_to_dist_server(request):
     if request.user.is_authenticated and request.user.groups.filter(name='Удаленный доступ').exists():
         return redirect('http://127.0.0.1:3000/wetty/')
     else:
-        return redirect('http://127.0.0.1:7000/signin/')
+        return redirect('http://127.0.0.1:8000/signin/')
 
 
 # Create your views here.
