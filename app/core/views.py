@@ -49,9 +49,9 @@ def sign_up(request):
                 user.username = user.username.lower()
                 user.save()
                 login(request, user)
-                return HttpResponse(body= {'message': 'SUCCESS'}, status=200)
+                return JsonResponse({'message': 'SUCCESS'}, status=200)
             else:
-                return HttpResponse(body= {'message':'Data invalid'}, status=400)
+                return JsonResponse({'message': 'Data invalid'}, status=400)
         except Exception as e:
             return JsonResponse({'message': str(e)}, status=500)
     return HttpResponse(status=405)
