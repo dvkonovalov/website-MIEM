@@ -5,10 +5,12 @@ const RegisterForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   let csrftoken;
+
   try {
     csrftoken = document.cookie
       .split(';')
@@ -21,41 +23,39 @@ const RegisterForm = () => {
   const submit = async (e) => {
     e.preventDefault();
     setError('');
-
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-
     try {
-      const response = await fetch('http://127.0.0.1:7000/account/signup/', {
-        method: 'POST',
+      const response = await fetch("http://127.0.0.1:7000/account/signup/", {
+        method: "POST",
         headers: {
           'Content-Type': 'application/json',
           'X-CSRFToken': csrftoken,
         },
         body: JSON.stringify({
           username: username,
-          password: password,
-          confirmPassword: confirmPassword,
+          password1: password,
+          password2: confirmPassword,
+          email: email,
+
         }),
       });
 
       if (!response.ok) {
-        throw new Error('Server response not OK');
+        throw new Error('Failed to create account.');
       }
 
       const result = await response.json();
+      alert(result);
 
-      if (response.status === 200) {
-        alert('You are registered successfully.');
+      if (result.message === "SUCCESS") {
+        alert("Registration succeded.");
         navigate('/');
+        window.location.reload();
       } else {
-        setError('Please check your registration information.');
+        setError("Please check your registration information.");
       }
     } catch (error) {
       console.error('Registration failed:', error);
-      setError('Registration failed: ' + error.message);
+      setError("Registration failed: " + error.message);
     }
   };
 
@@ -71,6 +71,17 @@ const RegisterForm = () => {
             className="w-full p-2 text-white bg-black border border-custom-gray"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <input
+            id="email"
+            type="email"
+            placeholder="Email"
+            className="w-full p-2 text-white bg-black border border-custom-gray"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
