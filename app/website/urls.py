@@ -26,6 +26,6 @@ urlpatterns = [
     path('schedule/', include('core.urls')),
     path('useful_links/', include('core.urls')),
     path('account/', include('core.urls')),
-    path('wetty/', include('core.urls')),
+    path('wetty/', include('wetty.urls')),
     path('', include('core.urls')),
 ]
