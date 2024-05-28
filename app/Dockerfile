@@ -28,5 +28,5 @@ RUN chown user /app && chown user /app/db.sqlite3 || true
 RUN chown user /app/media -R && chown user /app/core -R
 
 USER user
-EXPOSE 8000
-ENTRYPOINT .venv/bin/python manage.py runserver 0.0.0.0:8000
+EXPOSE 80
+ENTRYPOINT .venv/bin/python manage.py runserver 0.0.0.0:80
