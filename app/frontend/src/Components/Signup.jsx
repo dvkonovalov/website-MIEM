@@ -40,22 +40,22 @@ const RegisterForm = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to create account.');
+        throw new Error('Не получилось создать новый аккаунт.');
       }
 
       const result = await response.json();
       alert(result);
 
       if (result.message === "SUCCESS") {
-        alert("Registration succeded.");
+        alert("Аккаунт успешно создан.");
         navigate('/');
         window.location.reload();
       } else {
-        setError("Please check your registration information.");
+        setError("Проверьте информации.");
       }
     } catch (error) {
-      console.error('Registration failed:', error);
-      setError("Registration failed: " + error.message);
+      console.error('Не получилось создать новый аккаунт:', error);
+      setError("Не получилось создать новый аккаунт: " + error.message);
     }
   };
 

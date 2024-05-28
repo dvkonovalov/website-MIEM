@@ -36,7 +36,7 @@ const AuthorizationForm = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Server response not OK');
+        throw new Error('Не получилось авторизоваться');
       }
 
       const result = await response.json();
@@ -44,15 +44,15 @@ const AuthorizationForm = () => {
 
 
       if (result.Authorization === "Success") {
-        alert("You are logged in.");
+        alert("Успешная авторизация.");
         navigate('/');
         window.location.reload();
       } else {
-        setError("Please check your login information.");
+        setError("Проверьте информации.");
       }
     } catch (error) {
-      console.error('Login failed:', error);
-      setError("Login failed: " + error.message);
+      console.error('Не получилось авторизоваться:', error);
+      setError("Не получилось авторизоваться " + error.message);
     }
   };
 
@@ -104,7 +104,7 @@ const AuthorizationForm = () => {
             Войти
           </button>
         </div>
-        <div className="flex justify-center mt-1">
+        <div className="flex justify-center mt-2">
           <a href="/signup" className="text-white text-sm">Зарегистрироваться</a>
         </div>
         <div className="flex justify-center mt-1">

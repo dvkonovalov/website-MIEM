@@ -17,11 +17,42 @@ const ScheduleFetcher = () => {
     `http://127.0.0.1:7000/api/schedule/?fromdate=${formatDate(toprofessor)}&todate=${formatDate(nextWeek)}`,
     fetcher,
   );
-  if (error) return <div className="text-white">Failed to load schedules</div>;
-  if (!schedules) return <div className="text-white">Loading...</div>;
+  if (error) return (
+    <div className='p-4'>
+        <div className="mb-4 flex justify-between">
+        <a href="/" className="text-gray-400 hover:text-gray-300 text-lg sm:text-xl">
+          ← Главная
+        </a>
+        <h1 className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center flex-1">Расписание</h1>
+        <div style={{ width: '5.333333rem' }} />
+        </div>
+        <div className="flex justify-center content-center w-full min-h-screen">
+          <div className="text-white">Ошибка при загрузки...</div>
+        </div>
+  </div>);
+  if (!schedules) return (
+  <div className='p-4'>
+        <div className="mb-4 flex justify-between">
+        <a href="/" className="text-gray-400 hover:text-gray-300 text-lg sm:text-xl">
+          ← Главная
+        </a>
+        <h1 className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center flex-1">Расписание</h1>
+        <div style={{ width: '5.333333rem' }} />
+        </div>
+        <div className="flex justify-center content-center w-full min-h-screen">
+          <div className="text-white">Загрузка...</div>
+        </div>
+  </div>);
 
   return (
-    <div className="p-5">
+    <div className="p-4">
+        <div className="mb-4 flex justify-between">
+        <a href="/" className="text-gray-400 hover:text-gray-300 text-lg sm:text-xl">
+          ← Главная
+        </a>
+        <h1 className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center flex-1">Расписание</h1>
+        <div style={{ width: '5.333333rem' }} />
+      </div>
       {schedules.map((professor, index) => professor.Count > 0 && (
         <div key={index} className="mb-4 p-6 rounded-lg shadow">
           <div className="flex justify-normal">
