@@ -10,7 +10,7 @@ const Labs = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:7000/api/work/');
+        const response = await fetch('http://127.0.0.1/api/work/');
         const data = await response.json();
         setReports(data);
       } catch (error) {

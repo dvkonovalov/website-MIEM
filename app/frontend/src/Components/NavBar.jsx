@@ -16,7 +16,7 @@ const Navbar = () => {
 
   const handleLogOut = async () => {
     try {
-      await axios.post('http://127.0.0.1:7000/account/logout/', {}, {
+      await axios.post('http://127.0.0.1/account/logout/', {}, {
         headers: {
           'Content-Type': 'application/json',
           'X-CSRFToken': document.cookie
