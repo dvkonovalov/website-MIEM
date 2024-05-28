@@ -133,7 +133,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 MEDIA_URL = 'api/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend', 'build', 'static'), os.path.join(BASE_DIR, 'templates')]  # Добалено
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend', 'build', 'static'), os.path.join(BASE_DIR, 'core', 'templates'),
+                    os.path.join(BASE_DIR, 'wetty', 'templates')]  # Добалено
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

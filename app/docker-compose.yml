@@ -24,7 +24,8 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     ports:
-      - 7000:7000
+      - 80:80
+      - 443:443
     depends_on:
       - app
       - wetty

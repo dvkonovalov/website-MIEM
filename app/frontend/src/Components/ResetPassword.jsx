@@ -23,7 +23,7 @@ const ResetPassword = () => {
     e.preventDefault();
     setError('');
     try {
-      const response = await fetch("http://127.0.0.1:7000/account/reset_password/", {
+      const response = await fetch("http://127.0.0.1/account/reset_password/", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',

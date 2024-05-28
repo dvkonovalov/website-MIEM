@@ -24,7 +24,7 @@ const RegisterForm = () => {
     e.preventDefault();
     setError('');
     try {
-      const response = await fetch("http://127.0.0.1:7000/account/signup/", {
+      const response = await fetch("http://127.0.0.1/account/signup/", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',

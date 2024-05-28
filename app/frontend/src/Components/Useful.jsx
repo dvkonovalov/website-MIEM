@@ -6,7 +6,7 @@ const Useful_links = () => {
   useEffect(() => {
     const fetchResources = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:7000/api/useful_links');
+        const response = await fetch('http://127.0.0.1/api/useful_links');
         const data = await response.json();
         setResources(data);
       } catch (error) {

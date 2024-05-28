@@ -8,7 +8,7 @@ import json
 
 def login_view(request):
     if request.method == "GET":
-        return redirect('http://127.0.0.1:7000/signin')
+        return redirect('http://127.0.0.1/signin')
     elif request.method == "POST":
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
@@ -24,7 +24,7 @@ def login_view(request):
 
 def logout_view(request):
     if request.method == "GET":
-        return redirect('http://127.0.0.1:7000/logout')
+        return redirect('http://127.0.0.1/logout')
     elif request.method == "POST":
         logout(request)
         return JsonResponse({'Authorization': 'Success'}, status=200)
