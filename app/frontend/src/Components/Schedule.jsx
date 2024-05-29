@@ -14,7 +14,7 @@ const ScheduleFetcher = () => {
   };
 
   const { data: schedules, error } = useSWR(
-    `http://127.0.0.1/api/schedule/?fromdate=${formatDate(toprofessor)}&todate=${formatDate(nextWeek)}`,
+    `http://81.200.153.136/api/schedule/?fromdate=${formatDate(toprofessor)}&todate=${formatDate(nextWeek)}`,
     fetcher,
   );
   if (error) return (

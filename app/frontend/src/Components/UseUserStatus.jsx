@@ -8,7 +8,7 @@ const useUserStatus = () => {
 
   const fetchUserStatus = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1/api/status_user/');
+      const response = await axios.get('http://81.200.153.136/api/status_user/');
       if (response.status === 200) {
         const data = response.data;
         setUserStatus(data);

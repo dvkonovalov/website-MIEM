@@ -23,7 +23,7 @@ const AuthorizationForm = () => {
     e.preventDefault();
     setError('');
     try {
-      const response = await fetch("http://127.0.0.1/account/login/", {
+      const response = await fetch("http://81.200.153.136/account/login/", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',

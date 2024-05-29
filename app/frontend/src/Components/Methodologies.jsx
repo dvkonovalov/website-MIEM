@@ -10,7 +10,7 @@ const Methodologies = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1/api/material/');
+        const response = await fetch('http://81.200.153.136/api/material/');
         const data = await response.json();
         setReports(data);
       } catch (error) {
