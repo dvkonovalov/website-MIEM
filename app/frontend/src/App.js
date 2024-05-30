@@ -12,6 +12,7 @@ import AuthorizationForm from './Components/Signin';
 import RegisterForm from './Components/Signup';
 import useUserStatus from './Components/UseUserStatus';
 import ResetPassword from './Components/ResetPassword';
+import Layout from './Components/Layout';
 
 
 const PublicRoute = ({ element }) => {
@@ -30,18 +31,20 @@ const PublicRoute = ({ element }) => {
 function App() {
   return (
     <Router>
+      <Layout>
       <NavBar />
-      <Routes>
-        <Route path="/" element={<div className="py-8"><Body /></div>} />
-        <Route path="/labs" element={<Labs />} />
-        <Route path="/material" element={<Methodologies />} />
-        <Route path="/recrutement" element={<Vacancies />} />
-        <Route path="/signin" element={<PublicRoute element={<AuthorizationForm />} />} />
-        <Route path="/forgot_password" element={<PublicRoute element={<ResetPassword />} />} />
-        <Route path="/schedule" element={<ScheduleFetcher />} />
-        <Route path="/useful_links" element={<Useful_links />} />
-        <Route path="/signup" element={<PublicRoute element={<RegisterForm />} />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<div className="py-8"><Body /></div>} />
+          <Route path="/labs" element={<Labs />} />
+          <Route path="/material" element={<Methodologies />} />
+          <Route path="/recrutement" element={<Vacancies />} />
+          <Route path="/signin" element={<PublicRoute element={<AuthorizationForm />} />} />
+          <Route path="/forgot_password" element={<PublicRoute element={<ResetPassword />} />} />
+          <Route path="/schedule" element={<ScheduleFetcher />} />
+          <Route path="/useful_links" element={<Useful_links />} />
+          <Route path="/signup" element={<PublicRoute element={<RegisterForm />} />} />
+        </Routes>
+      </Layout>
     </Router>
   );
 }
