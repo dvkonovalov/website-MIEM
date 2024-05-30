@@ -30,6 +30,7 @@ const Vacancies = () => {
         </div>
       </div>
       <div className="flex flex-grow justify-center">
+        
         <div className="bg-black text-white p-4 w-3/4 md:w-4/5">
           <div className="flex flex-wrap justify-center gap-4 p-4">
             {jobs.map((job) => (
