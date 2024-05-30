@@ -1,8 +1,8 @@
-const Layout = ({ children }) => {
+const Layout = ({ child }) => {
     return (
       <div className="min-h-screen flex flex-col">
         <main className="flex-grow">
-          {children}
+          {child}
         </main>
         <footer class="w-full bg-black border border-custom-gray text-white mt-auto p-4 relative">
             <div class="flex justify-between items-center container mx-auto px-4">
