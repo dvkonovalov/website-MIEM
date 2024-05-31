@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import NavBar from "./Components/NavBar";
 import Body from './Components/Body';
@@ -29,6 +29,7 @@ const PublicRoute = ({ element }) => {
 };
 
 function App() {
+
   return (
     <Router>
       <Layout>

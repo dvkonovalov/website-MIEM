@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import useUserStatus from './UseUserStatus';
-import { ReactComponent as Logo } from '../Utils/logo.svg';
+import logo from '../Utils/logo.svg';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -34,15 +34,15 @@ const Navbar = () => {
   };
 
   const handleNoAccess = () => {
-    alert("You don't have access to the servers");
+    alert("У вас нет доступа к серверам");
   };
 
   return (
     <nav className="bg-black text-white p-4">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div>
-          <a href="/" className="hover:text-gray-300">
-            Logo
+          <a href="/">
+          <img src={logo} className="h-8 w-8"/>
           </a>
         </div>
         <div className="flex-grow flex flex-col sm:flex-row md:flex-row justify-center items-center space-x-0 sm:space-x-8 space-y-4 sm:space-y-0">
@@ -51,7 +51,7 @@ const Navbar = () => {
           <a href="/schedule" className="hover:text-gray-300">Расписание</a>
           <a href="/useful_links" className="hover:text-gray-300">Ссылки</a>
           {isSessionValid && hasRemoteAccess ? (
-            <a href="/wetty" className="hover:text-gray-300">Сервера</a>
+            <a href="http://127.0.0.1:3000/wetty" className="hover:text-gray-300">Сервера</a>
           ) : (
             <a onClick={handleNoAccess} className="hover:text-gray-300 cursor-pointer">Сервера</a>
           )}
