@@ -67,7 +67,7 @@ const RegisterForm = () => {
           <input
             id="username"
             type="text"
-            placeholder="Username"
+            placeholder="Имя пользователя"
             className="w-full p-2 text-white bg-black border border-custom-gray"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -78,7 +78,7 @@ const RegisterForm = () => {
           <input
             id="email"
             type="email"
-            placeholder="Email"
+            placeholder="Почта"
             className="w-full p-2 text-white bg-black border border-custom-gray"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
