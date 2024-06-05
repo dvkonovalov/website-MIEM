@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Professors, News, Vacancy, Material, Work, Link
+from core.models import Professors, News, Vacancy, Material, Work, Link, Skill
 
 
 class ProfessorSerializers(serializers.ModelSerializer):
@@ -14,10 +14,17 @@ class NewsSerializers(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class SkillsSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Skill
+        fields = ('name',)
+
+
 class VacancySerializers(serializers.ModelSerializer):
+    skills = SkillsSerializers(many = True, read_only = True)
     class Meta:
         model = Vacancy
-        fields = '__all__'
+        fields = ('title', 'skills',)
 
 
 class MaterialSerializers(serializers.ModelSerializer):

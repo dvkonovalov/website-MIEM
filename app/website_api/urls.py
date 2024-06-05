@@ -10,6 +10,7 @@ router.register('material', views.MaterialApi)
 router.register('vacancy', views.VacancysApi)
 router.register('useful_links', views.LinkApi)
 router.register('work', views.WorkApi)
+router.register('skills', views.SkillApi)
 
 
 

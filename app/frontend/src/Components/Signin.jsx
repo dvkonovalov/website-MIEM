@@ -92,7 +92,7 @@ const AuthorizationForm = () => {
           <a href="/signup" className="text-white text-sm">Зарегистрироваться</a>
         </div>
         <div className="flex justify-center mt-1">
-          <a href="/forgot_password" className="text-white text-sm">Забыли пароль?</a>
+          <a href="account/reset-password/" className="text-white text-sm">Забыли пароль?</a>
         </div>
       </div>
     </form>

@@ -50,7 +50,7 @@ def sign_up(request):
                 user.username = user.username.lower()
                 user.save()
                 login(request, user)
-                return JsonResponse({'message': 'SUCCESS'}, status=200)
+                return JsonResponse({'message': form}, status=200)
             else:
                 return JsonResponse({'message': 'Data invalid'}, status=400)
         except Exception as e:

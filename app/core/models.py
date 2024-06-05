@@ -80,7 +80,7 @@ class News(models.Model):
 
 class Skill(models.Model):
     name: models.CharField = models.CharField(
-        max_length=50,
+        max_length=150,
         unique=True,
         verbose_name='Навык',
     )
