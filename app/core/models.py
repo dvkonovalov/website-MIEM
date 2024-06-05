@@ -106,6 +106,12 @@ class Vacancy(models.Model):
         verbose_name='Необходимые навыки',
     )
 
+    link_miem: models.CharField = models.CharField(
+        max_length=150,
+        blank=False,
+        verbose_name='Внешняя ссылка',
+    )
+
     def __str__(self):
         return self.title
 

@@ -24,7 +24,7 @@ class VacancySerializers(serializers.ModelSerializer):
     skills = SkillsSerializers(many = True, read_only = True)
     class Meta:
         model = Vacancy
-        fields = ('title', 'skills',)
+        fields = ('title', 'skills', 'link_miem')
 
 
 class MaterialSerializers(serializers.ModelSerializer):
