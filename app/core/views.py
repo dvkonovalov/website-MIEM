@@ -44,7 +44,7 @@ def sign_up(request):
                 'password2': body['password2'],
                 'email': body['email']
             })
-            
+
             if form.is_valid():
                 user = form.save(commit=False)
                 user.username = user.username.lower()
@@ -52,7 +52,7 @@ def sign_up(request):
                 login(request, user)
                 return JsonResponse({'message': form}, status=200)
             else:
-                return JsonResponse({'message': 'Data invalid'}, status=400)
+                return JsonResponse({'message': form.error_messages}, status=400)
         except Exception as e:
             return JsonResponse({'message': str(e)}, status=500)
     return HttpResponse(status=405)
