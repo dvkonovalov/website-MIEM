@@ -109,6 +109,7 @@ class Vacancy(models.Model):
     link_miem: models.CharField = models.CharField(
         max_length=150,
         blank=False,
+        default='',
         verbose_name='Внешняя ссылка',
     )
 

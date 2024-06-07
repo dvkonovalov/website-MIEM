@@ -2,6 +2,7 @@ import requests
 from rest_framework import viewsets
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from core.models import Professors, News, Vacancy, Material, Link, Work, Skill
 from .serializers import ProfessorSerializers, NewsSerializers, VacancySerializers, MaterialSerializers, LinkSerializers, WorkSerializers, SkillsSerializers
@@ -120,3 +121,7 @@ def get_status(request):
     else:
         response['authorized'] = 'false'
         return JsonResponse(response, safe=False)
+
+@ensure_csrf_cookie
+def get_csrf(request):
+    return JsonResponse({})

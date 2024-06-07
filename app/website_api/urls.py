@@ -17,5 +17,6 @@ router.register('skills', views.SkillApi)
 urlpatterns = [
     path('media/<str:folder>/<str:file_name>', views.getfile),
     path('schedule/', views.getschedule),
-    path('status_user/', views.get_status)
+    path('status_user/', views.get_status),
+    path('getcsrf/', views.get_csrf)
 ] + router.urls
