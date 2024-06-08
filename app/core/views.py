@@ -36,23 +36,19 @@ def sign_up(request):
         return render(request, "index.html", context)
     elif request.method == 'POST':
         try:
-            body_unicode = request.body.decode('utf-8')
-            body = json.loads(body_unicode)
-            form = RegisterForm({
-                'username': body['username'],
-                'password1': body['password1'],
-                'password2': body['password2'],
-                'email': body['email']
-            })
-
+            form = RegisterForm(request.POST)
             if form.is_valid():
-                user = form.save(commit=False)
-                user.username = user.username.lower()
-                user.save()
+                user = form.save()
                 login(request, user)
-                return JsonResponse({'message': form}, status=200)
+                return JsonResponse({'message': 'Success'}, status=200)
             else:
-                return JsonResponse({'message': form.error_messages}, status=400)
+                errorlist = []
+                form = str(form)
+                while form.find('<li>') != -1:
+                    form = form[form.find('<li>')+4:]
+                    errorlist.append(form[:form.find('</li>')])
+                context = {'error': json.dumps(errorlist)}
+                return JsonResponse(context, status=200)
         except Exception as e:
             return JsonResponse({'message': str(e)}, status=500)
     return HttpResponse(status=405)
