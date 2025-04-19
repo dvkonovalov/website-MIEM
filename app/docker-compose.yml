@@ -6,8 +6,6 @@ services:
     volumes:
       - db-data:/app/
       - media-data:/app/media
-    ports:
-      - 80:80
     networks:
       - internal_network
 

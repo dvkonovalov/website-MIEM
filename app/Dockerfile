@@ -29,4 +29,4 @@ RUN chown user /app/media -R && chown user /app/core -R
 
 USER user
 EXPOSE 80
-ENTRYPOINT .venv/bin/python manage.py runserver 0.0.0.0:80
+ENTRYPOINT .venv/bin/python manage.py runserver 0.0.0.0:8080

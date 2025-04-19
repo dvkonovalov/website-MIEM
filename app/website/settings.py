@@ -76,13 +76,29 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'website.wsgi.application'
 
+
 CORS_ALLOWED_ORIGINS = [
     'http://81.200.153.136',
     'http://127.0.0.1:80',
-
+    'http://localhost:443',
+    'http://localhost',
 ]
 
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1', 'http://81.200.153.136']
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_HEADERS = [
+    'authorization',
+    'content-type',
+    'x-csrftoken',
+]
+
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1',
+    'http://81.200.153.136',
+    'http://localhost',
+]
 
 
 # Database

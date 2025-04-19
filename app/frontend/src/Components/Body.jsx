@@ -15,7 +15,7 @@ const Body = () => {
         
         <>
         <div className="flex flex-col justify-center items-center text-white py-20 px-4">
-            <h1 className="text-3xl md:text-5xl font-bold mb-3">Лаборатория</h1>
+            <h1 className="text-3xl md:text-5xl font-bold mb-3">Учебная Лаборатория</h1>
             <h2 className="text-3xl md:text-5xl font-bold mb-6">Сетевых Технологий</h2>
         </div>
         
@@ -88,7 +88,7 @@ const Body = () => {
                                 </div>
                             </div>
                             <div className="absolute bottom-0 right-0 mr-8 mb-2">
-                            {isSessionValid && hasRemoteAccess ? (<a href="http://127.0.0.1:3000/wetty">
+                            {isSessionValid && hasRemoteAccess ? (<a href="https://gatekeeper.miem.hse.ru/">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                                     </svg>

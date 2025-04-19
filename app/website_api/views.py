@@ -50,46 +50,6 @@ class SkillApi(viewsets.ModelViewSet):
     queryset = Skill.objects.all()
     serializer_class = SkillsSerializers
 
-def getschedule(request):
-    fromdate = request.GET.get('fromdate')
-    todate = request.GET.get('todate')
-    try:
-        local_ids = Professors.objects.values_list('id', flat=True)
-        all_schedules = []
-        for id in local_ids:
-            try:
-                lectureroid = Professors.objects.get(id=id).get_lectureroid()
-                if lectureroid == -1:
-                    return HttpResponseNotFound("<h1>Professor not found</h1>")
-                res = requests.get(
-                    'http://www.hse.ru/api/timetable/lessons?receiverType=1&'
-                    f'fromdate={fromdate}&todate={todate}&lectureroid={lectureroid}'
-                )
-            except Professors.DoesNotExist:
-                continue
-            res = res.json()
-            schedule = dict()
-            schedule['Count'] = res['Count']
-            lessons = []
-            for i in res['Lessons']:
-                lessons.append({
-                    'auditorium': i['auditorium'],
-                    'beginLesson': i['beginLesson'],
-                    'building': i['building'],
-                    'date': i['date'],
-                    'dayOfWeekString': i['dayOfWeekString'],
-                    'discipline': i['discipline'],
-                    'endLesson': i['endLesson'],
-                    'kindOfWork': i['kindOfWork'],
-                    'lecturer': i['lecturer'],
-                    'lecturer_rank': i['lecturer_rank']
-                })
-            schedule['Lessons'] = lessons
-            all_schedules.append(schedule)
-        return JsonResponse(all_schedules, safe=False)
-    except ObjectDoesNotExist:
-        return HttpResponseNotFound("<h1>Professor not found</h1>")
-
 
 def getfile(request, folder, file_name):
     img = ['png', 'jpg', 'jpeg', 'webp']

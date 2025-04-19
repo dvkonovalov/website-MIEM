@@ -94,22 +94,21 @@ class Vacancy(models.Model):
         verbose_name = 'Вакансия'
         verbose_name_plural = 'Вакансии'
 
-    title: models.CharField = models.CharField(
+    title = models.CharField(
         max_length=50,
         blank=False,
         verbose_name='Название вакансии',
     )
 
-    skills: models.ManyToManyField = models.ManyToManyField(
-        Skill,
+    skills = models.ManyToManyField(
+        'Skill',  # Use a string if Skill is defined later
         blank=True,
         verbose_name='Необходимые навыки',
     )
 
-    link_miem: models.CharField = models.CharField(
+    link_miem = models.CharField(
         max_length=150,
         blank=False,
-        default='',
         verbose_name='Внешняя ссылка',
     )
 
@@ -118,6 +117,7 @@ class Vacancy(models.Model):
 
     def get_skills_list(self):
         return [skill.name for skill in self.skills.all()]
+
 
 
 class Material(models.Model):

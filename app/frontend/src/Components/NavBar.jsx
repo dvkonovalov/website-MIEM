@@ -46,16 +46,15 @@ const Navbar = () => {
           </a>
         </div>
         <div className="flex-grow flex flex-col sm:flex-row md:flex-row justify-center items-center space-x-0 sm:space-x-8 space-y-4 sm:space-y-0">
-          <a href="/labs" className="hover:text-gray-300">Лабы</a>
+          <a href="https://netlab.auditory.ru/" className="hover:text-gray-300">Лабы</a>
           <a href="/material" className="hover:text-gray-300">Методички</a>
-          <a href="/schedule" className="hover:text-gray-300">Расписание</a>
           <a href="/useful_links" className="hover:text-gray-300">Ссылки</a>
           {isSessionValid && hasRemoteAccess ? (
-            <a href="http://127.0.0.1:3000/wetty" className="hover:text-gray-300">Сервера</a>
+            <a href="https://gatekeeper.miem.hse.ru/" className="hover:text-gray-300">Сервера</a>
           ) : (
             <a onClick={handleNoAccess} className="hover:text-gray-300 cursor-pointer">Сервера</a>
           )}
-          <a href="/recrutement" className="hover:text-gray-300">Вакансии</a>
+          <a href="https://cabinet.miem.hse.ru/profile/618/managed/active" className="hover:text-gray-300">Вакансии</a>
         </div>
         <div className="relative inline-block text-left">
       {isSessionValid ? (
